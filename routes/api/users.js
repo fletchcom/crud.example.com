@@ -49,6 +49,7 @@ router.get('/:userId', function(req,res){
 
     });
   });
+
   router.put('/', function(req, res){
 
     Users.findOne({'_id': req.body._id}, function(err, user){
@@ -106,5 +107,5 @@ router.get('/:userId', function(req,res){
     });
 
   });
-  
+
 module.exports = router;
