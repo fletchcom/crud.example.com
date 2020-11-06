@@ -12,8 +12,9 @@ router.post('/register', function(req,res,next){
     email: data.email,
     first_name: data.first_name,
     last_name: data.last_name
-  }), 
-  data.password, 
+  }),
+
+  data.password, 	  
   function(err, user){
 
     if(err){
@@ -61,13 +62,12 @@ router.post('/login', function(req, res, next) {
 });
 
 router.delete('/logout', function(req, res){
-    req.session.destroy(function (err) {
-      if(err){
-        return res.json({success: 'false'});
-      }else{
-        return res.json({success: 'true'});
-      }
-    });
-  });
+  req.logout();
+  if(!req.session.passport.user){
+    return res.json({success: 'true'});
+  }else{
+    return res.json({success: 'false'});
+  }
+});
 
 module.exports = router;  
